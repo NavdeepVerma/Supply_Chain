@@ -1,0 +1,62 @@
+/**
+ * supplychain model file
+ */
+
+namespace org.acme.model.supplychain
+
+asset Vegetable identified by vin {
+  o String vin
+  --> Member owner
+}
+
+enum ListingState {
+  o HARVEST
+  o HARVESTED
+  o IN_DELIVER_W
+  o IN_DELIVER_C
+  o DELIVERED
+}
+
+asset VegetableListing identified by listingId {
+  o String listingId
+  o ListingState state
+  o Order[] order optional
+  --> Vegetable vege
+}
+
+abstract participant User identified by uid {
+  o String uid
+  o String name
+}
+
+participant Consumer extends User {
+  o String vorder
+}
+
+
+participant Warehouse extends User {
+  
+}
+
+participant Farmer extends User{
+
+}
+participant Transporter extends User{
+  
+}
+participant Member extends User{
+}
+
+transaction Order{
+  --> VegetableListing listing
+  --> Consumer member
+}
+
+
+transaction Delivery {
+  --> VegetableListing listing
+}
+
+transaction Harvested{
+ --> VegetableListing listing
+}
