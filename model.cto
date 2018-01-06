@@ -6,7 +6,7 @@ namespace org.acme.model.supplychain
 
 asset Vegetable identified by vin {
   o String vin
-  --> Member owner
+  o String owner
 }
 
 enum ListingState {
@@ -14,13 +14,13 @@ enum ListingState {
   o HARVESTED
   o IN_DELIVER_W
   o IN_DELIVER_C
-  o DELIVERED
+  o DELIVERED_W
+  o DELIVERED_C
 }
 
 asset VegetableListing identified by listingId {
   o String listingId
   o ListingState state
-  o Order[] order optional
   --> Vegetable vege
 }
 
@@ -45,18 +45,27 @@ participant Transporter extends User{
   
 }
 participant Member extends User{
+  
 }
 
-transaction Order{
+transaction Orderc{
   --> VegetableListing listing
   --> Consumer member
 }
 
-
-transaction Delivery {
+transaction Orderw{
   --> VegetableListing listing
+  --> Warehouse member
 }
 
 transaction Harvested{
  --> VegetableListing listing
+ --> Farmer member
+}
+
+transaction Deliver{
+ --> VegetableListing listing
+ --> Vegetable vegetable_id
+ --> Member ware
+ --> Transporter id
 }
