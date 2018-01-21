@@ -60,13 +60,13 @@ In the `Warehouse` participant registry, create a new participant
 }
 ```
 
-In the `Vegetable` asset registry, create a new asset of a vegetable owned by `uid` **1596**
+In the `Vegetable` asset registry, create a new asset of a vegetable owned by `uid` **6399**
 
 ```
 {
 	"$class": "org.acme.model.supplychain.Warehouse",
     "vin": "t12",
-    "owner": "resources:org.acme.model.supplychain.Farmer#1596"
+    "owner": "resources:org.acme.model.supplychain.Farmer#6399"
 }
 ```
 
