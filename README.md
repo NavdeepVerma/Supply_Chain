@@ -12,7 +12,7 @@ The business network defines:
 
 **Transactions:** `Orderw` `Orderc` `Deliver` `Harvested`
 
-The `harvest` function is called when an `Harvested` transaction is submitted by the warehouse. The logic simply checks that the listing for the Vegetable is harvest, and then updates the VegetableListing status to harvested  **(_= participant intials)**
+The `harvest` function is called when an `Harvested` transaction is submitted by the farmer. The logic simply checks that the listing for the Vegetable is harvest, and then updates the VegetableListing status to harvested  **(_= participant intials)**
 
 The `makeOrderw` function is called when an `Order` transaction is submitted by the warehouse. The logic simply checks that the listing for the Vegetable is harvested and up for sale, and then updates the VegetableListing status to indeliver_w  **(_= participant intials)**
 
