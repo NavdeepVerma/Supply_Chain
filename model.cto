@@ -27,6 +27,7 @@ asset VegetableListing identified by listingId {
 abstract participant User identified by uid {
   o String uid
   o String name
+  --> Member member_id
 }
 
 participant Consumer extends User {
