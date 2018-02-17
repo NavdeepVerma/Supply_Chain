@@ -10,11 +10,15 @@ The business network defines:
 
 **Assets:** `Vegetable` `VegetableListing`
 
-**Transactions:** `Order` `Delivery` 
+**Transactions:** `Orderw` `Orderc` `Deliver` `Harvested`
 
-The `makeOrder` function is called when an `Order` transaction is submitted. The logic simply checks that the listing for the Vegetable is harvested and up for sale, and then updates the VegetableListing status will be updated to indeliver_  **(_= participant intials)**
+The `harvest` function is called when an `Harvested` transaction is submitted by the farmer. The logic simply checks that the listing for the Vegetable is harvest, and then updates the VegetableListing status to harvested  **(_= participant intials)**
 
-The `Deliver` function is called when a `Delivery` transaction is submitted. The logic simply checks that the listing status is "indeliver_", and then updates the vegetableListing owner to the next participant in the chain and status to delivered.
+The `makeOrderw` function is called when an `Orderw` transaction is submitted by the warehouse. The logic simply checks that the listing for the Vegetable is harvested and up for sale, and then updates the VegetableListing status to indeliver_w  **(_= participant intials)**
+
+The `makeOrderc` function is called when an `Orderc` transaction is submitted by the consumer. The logic simply checks that the listing for the vegetable is delivered_w and warehouse is the owner, and then updates the VegetableListing status to indeliver_c  **(_= participant intials)**
+
+The `Deliver` function is called when a `Delivery` transaction is submitted. The logic simply checks that the listing status is "indeliver_c" or "indeliver_w", and then updates the vegetableListing owner to the next participant in the chain and status to delivered.
 
 In the `Consumer` participant registry, create a new participant.
 
@@ -62,7 +66,7 @@ In the `Vegetable` asset registry, create a new asset of a vegetable owned by `u
 {
 	"$class": "org.acme.model.supplychain.Warehouse",
     "vin": "t12",
-    "owner": "resources:org.acme.model.supplychain.Farmer#1596"
+    "owner": "resources:org.acme.model.supplychain.Farmer#6399"
 }
 ```
 
