@@ -63,9 +63,16 @@ transaction Harvested{
  --> Farmer member
 }
 
-transaction Deliver{
+transaction deliver_w{
  --> VegetableListing listing
  --> Vegetable vegetable_id
- --> Member ware
+ --> Warehouse ware
+ --> Transporter id
+}
+
+transaction deliver_c{
+ --> VegetableListing listing
+ --> Vegetable vegetable_id
+ --> Consumer ware
  --> Transporter id
 }
