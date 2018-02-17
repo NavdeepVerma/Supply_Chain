@@ -6,7 +6,7 @@ namespace org.acme.model.supplychain
 
 asset Vegetable identified by vin {
   o String vin
-  o String owner
+  --> Member member_id
 }
 
 enum ListingState {
