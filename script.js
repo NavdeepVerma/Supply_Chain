@@ -80,25 +80,23 @@ function harvest(Harvested){
 }
 
 /**
-      * @param {org.acme.model.supplychain.Deliver} Deliver_W
+      * @param {org.acme.model.supplychain.deliver_w} Deliver_w
        * @transaction 
  */
 
-function Deliver(deliver_w){
+function Deliver_w(deliver_w){
   var listing=deliver_w.listing;
   var vege=deliver_w.vegetable_id;
   var member=deliver_w.ware;
   if(listing.state=='IN_DELIVER_W'){
     vege.owner=member.uid;
+    listing.state='DELIVERED_W';
   }
   else if(listing.state=='DELIVERED_W'){
    throw window.alert('Delivered at the warehouse');
   }
-  else if(listing.state=='IN_DELIVER_C'){
-  	listing.state='DELIVERED_C';
-  }
-  else if(listing.state=='DELIVERED_C'){
-  	throw window.alert('Deliverd to consumer');
+  else {
+  	throw window.alert('Order is not for warehouse');
   }
   return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
         .then(function(vegetableListingRegistry) {
@@ -106,6 +104,35 @@ function Deliver(deliver_w){
         });
   return getAssetRegistry('org.acme.model.supplychain.Vegetable')
         .then(function(assetRegistry) {
-            return assetRegistry.update(vege.owner);
+            return assetRegistry.update(vege);
+        });
+}
+
+/**
+      * @param {org.acme.model.supplychain.deliver_c} Deliver_c
+       * @transaction 
+ */
+
+function Deliver_c(deliver_c){
+  var listing=deliver_c.listing;
+  var vege=deliver_c.vegetable_id;
+  var member=deliver_c.ware;
+  if(listing.state=='IN_DELIVER_C'){
+    vege.owner=member.uid;
+    listing.state='DELIVERED_C';
+  }
+  else if(listing.state=='DELIVERED_C'){
+   throw window.alert('Delivered at the consumer');
+  }
+  else {
+  	throw window.alert('Order is not for consumer');
+  }
+  return getAssetRegistry('org.acme.model.supplychain.VegetableListing')
+        .then(function(vegetableListingRegistry) {
+            return vegetableListingRegistry.update(listing);
+        });
+  return getAssetRegistry('org.acme.model.supplychain.Vegetable')
+        .then(function(assetRegistry) {
+            return assetRegistry.update(vege);
         });
 }
